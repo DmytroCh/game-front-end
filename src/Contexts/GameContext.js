@@ -1,5 +1,4 @@
 import React from 'react';
 
-const defaultGame = {};
 
-export default React.createContext(defaultGame);
+export default React.createContext();

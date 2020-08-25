@@ -1,4 +1,19 @@
+canvas{
+    position: absolute;
+}
+
+#background-layer{
+    z-index: 0;
+}
+
+#game-layer{
+    z-index: 1;
+}
+
 #canvas-wrap{
-    display: inline-block;
-    margin:0 auto;
+    position: relative;
+}
+
+#pown{
+    opacity: 0;
 }
