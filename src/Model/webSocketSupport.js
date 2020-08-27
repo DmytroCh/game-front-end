@@ -45,14 +45,14 @@ export const initWebSocketEvents = (stateUpdate) => {
     socket = openSocket('http://localhost:4000');
 
     socket.on('new-player-joined', response => {
-        console.log('new-player-joined', response);
+        //console.log('new-player-joined', response);
         stateUpdate({
             data: {eventType: 'new-player-joined', response},
             socketId: socket.id
         });
     });
     socket.on('player-leave', response => {
-        console.log('player-leave', response);
+        //console.log('player-leave', response);
         stateUpdate({
             data: {eventType: 'player-leave', response},
             socketId: socket.id
@@ -63,14 +63,14 @@ export const initWebSocketEvents = (stateUpdate) => {
         //const player = response.players.find(player => player.id === this.socket.id);
         //console.log("you are the player", player);
         /*this.setState({playerNo: player.startPosition});*/
-        console.log('start-game', response);
+        //console.log('start-game', response);
         stateUpdate({
             data: {eventType: 'start-game', response},
             socketId: socket.id
         });
     });
     socket.on('board-changes', response => {
-        console.log('board-changes', response);
+        //console.log('board-changes', response);
         stateUpdate({
             data: {eventType: 'board-changes', response},
             socketId: socket.id

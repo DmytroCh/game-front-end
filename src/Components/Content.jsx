@@ -21,7 +21,7 @@ export default class Content extends React.Component{
     response: [server response]}*/
     updateState = (data) => {
         this.setState(data);
-        console.log(this.state);
+        //console.log(this.state);
     }
 
     render(){
