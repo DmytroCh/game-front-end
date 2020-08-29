@@ -231,8 +231,8 @@ const getClickedPown = (mousePosition) => {
                 && mousePosition.x <= cellsMap.cellsMap[arrayIndex].x + cellSize.width
                 && mousePosition.y > cellsMap.cellsMap[arrayIndex].y
                 && mousePosition.y <= cellsMap.cellsMap[arrayIndex].y + cellSize.height){
-                    if(serverResponse.data.response.board[i].length > 0){
-                        return serverResponse.data.response.board[i][0];
+                    if(serverResponse.data.response.board[arrayIndex].length > 0){
+                        return serverResponse.data.response.board[arrayIndex][0];
                     }
                 }
         }
