@@ -1,6 +1,8 @@
 export const cellsMap = Array(80).fill({x: -1, y: -1});
 export const cellsHomeMap = Array(40).fill({x: -1, y: -1});
 export const dicesMap = Array(4).fill({x: -1, y: -1});
+export const youMap = Array(4).fill({x: -1, y: -1});
+export const medalsMap = Array(4).fill({x: -1, y: -1});
 
 // This method creates array of left top cell possiton.
 // Required for powns navigation
@@ -108,4 +110,26 @@ export const generateDicesMap = (cellSize) => {
     dicesMap[2] = {x: 8 * cellSize.width, y: 1 * cellSize.height}
     //Player four
     dicesMap[3] = {x: 8 * cellSize.width, y: 8 * cellSize.height}
+}
+
+export const generateYouMap = (cellSize) => {
+    //Player one
+    youMap[0] = {x: 1 * cellSize.width, y: 7 * cellSize.height}
+    //Player two
+    youMap[1] = {x: 1 * cellSize.width, y: 0 * cellSize.height}
+    //Player three
+    youMap[2] = {x: 8 * cellSize.width, y: 0 * cellSize.height}
+    //Player four
+    youMap[3] = {x: 8 * cellSize.width, y: 7 * cellSize.height}
+}
+
+export const generateMedalsMap = (cellSize) => {
+    //Player one
+    medalsMap[0] = {x: 3 * cellSize.width, y: 7 * cellSize.height}
+    //Player two
+    medalsMap[1] = {x: 3 * cellSize.width, y: 0 * cellSize.height}
+    //Player three
+    medalsMap[2] = {x: 7 * cellSize.width, y: 0 * cellSize.height}
+    //Player four
+    medalsMap[3] = {x: 7 * cellSize.width, y: 7 * cellSize.height}
 }
