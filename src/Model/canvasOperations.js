@@ -48,8 +48,8 @@ export const setSizes = (board) => {
     }
 
     medalSize = {
-        width: board.width / 11,
-        height: board.height / 11
+        width: board.width / 22,
+        height: board.height / 22
     }
 
     boardSize = board;
@@ -143,17 +143,28 @@ const updateStartAreaPowns = (powns) => {
 const updateMedals = (players) => {
     players.forEach((player => {
         if(player.place !== 0){
-            const x = cellsMap.medalsMap[player.startPosition].x;
-            const y = cellsMap.medalsMap[player.startPosition].y;
+            const x = cellsMap.medalsMap[player.startPosition].x + medalSize.width / 2;
+            const y = cellsMap.medalsMap[player.startPosition].y + medalSize.heigh / 2;
+            const medalWidth = cellsMap.getMedals().width;
+            const medalHeight = cellsMap.getMedals().height;
             switch(player.place){
                 case 1:
-                    canvasGameLayer.drawImage(canvasContext.medalFirst.current, x, y, medalSize.width, medalSize.height);
+                    const goldenStartX = cellsMap.getMedals().positions.golden.x;
+                    const goldenStartY = cellsMap.getMedals().positions.golden.y;
+                    canvasGameLayer.drawImage(canvasContext.medals.current,goldenStartX, goldenStartY, medalWidth,
+                        medalHeight, x, y, medalSize.width, medalSize.height);
                     break;
                 case 2:
-                    canvasGameLayer.drawImage(canvasContext.medalSecond.current, x, y, medalSize.width, medalSize.height);
+                    const silverStartX = cellsMap.getMedals().positions.silver.x;
+                    const silverStartY = cellsMap.getMedals().positions.silver.y;
+                    canvasGameLayer.drawImage(canvasContext.medals.current,silverStartX, silverStartY, medalWidth,
+                        medalHeight, x, y, medalSize.width, medalSize.height);
                     break;
                 case 3:
-                    canvasGameLayer.drawImage(canvasContext.medalThird.current, x, y, medalSize.width, medalSize.height);
+                    const bronzeStartX = cellsMap.getMedals().positions.bronze.x;
+                    const bronzeStartY = cellsMap.getMedals().positions.bronze.y;
+                    canvasGameLayer.drawImage(canvasContext.medals.current,bronzeStartX, bronzeStartY, medalWidth,
+                        medalHeight, x, y, medalSize.width, medalSize.height);
                     break;
                 default:
             }

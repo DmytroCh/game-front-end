@@ -133,3 +133,25 @@ export const generateMedalsMap = (cellSize) => {
     //Player four
     medalsMap[3] = {x: 7 * cellSize.width, y: 7 * cellSize.height}
 }
+
+// This is medals sizes from image medals.svg
+export const getMedals = () => {
+    return {
+        width: 36,
+        height: 36,
+        positions:{
+            golden: {
+                x: 531,
+                y: 109
+            },
+            silver: {
+                x: 532,
+                y: 150
+            },
+            bronze: {
+                x: 533,
+                y: 189
+            }
+        }
+    }
+}

@@ -30,11 +30,10 @@ export default class Canvas extends React.Component {
     this.diceFour = React.createRef();
     this.diceFive = React.createRef();
     this.diceSix = React.createRef();
-    this.medalFirst = React.createRef();
-    this.medalSecond = React.createRef();
-    this.medalThird = React.createRef();
+    this.medals = React.createRef();
 
     this.movesQueue = -1;
+    this.canvasStyle = {marginLeft: (window.innerWidth - window.innerHeight) / 2};
   }
 
   static contextType = GameContext;
@@ -61,12 +60,14 @@ export default class Canvas extends React.Component {
           return (
             <div id="canvas-wrap">
             <canvas
+              style={this.canvasStyle}
               id="background-layer"
               ref={this.canvasBackgroundLayer}
               width={this.state.boardSize.height}
               height={this.state.boardSize.width}
             />
             <canvas
+              style={this.canvasStyle}
               id="game-layer"
               ref={this.canvasGameLayer}
               width={this.state.boardSize.height}
@@ -174,21 +175,9 @@ export default class Canvas extends React.Component {
             </div>
             <div>
               <img
-                  ref={this.medalFirst}
-                  src={require("../assets/dice/4.svg")}
+                  ref={this.medals}
+                  src={require("../assets/medals.svg")}
                   alt="first-place"
-                  className="hidden"
-                />
-                <img
-                  ref={this.medalSecond}
-                  src={require("../assets/dice/5.svg")}
-                  alt="second-place"
-                  className="hidden"
-                />
-                <img
-                  ref={this.medalThird}
-                  src={require("../assets/dice/6.svg")}
-                  alt="third-place"
                   className="hidden"
                 />
             </div>
