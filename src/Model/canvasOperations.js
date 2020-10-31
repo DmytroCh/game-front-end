@@ -144,9 +144,10 @@ const updateMedals = (players) => {
     players.forEach((player => {
         if(player.place !== 0){
             const x = cellsMap.medalsMap[player.startPosition].x + medalSize.width / 2;
-            const y = cellsMap.medalsMap[player.startPosition].y + medalSize.heigh / 2;
+            const y = cellsMap.medalsMap[player.startPosition].y + medalSize.height / 2;
             const medalWidth = cellsMap.getMedals().width;
             const medalHeight = cellsMap.getMedals().height;
+
             switch(player.place){
                 case 1:
                     const goldenStartX = cellsMap.getMedals().positions.golden.x;
