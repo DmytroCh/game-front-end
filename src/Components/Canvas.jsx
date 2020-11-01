@@ -15,6 +15,7 @@ export default class Canvas extends React.Component {
     this.canvasBackgroundLayer = React.createRef();
     this.canvasGameLayer = React.createRef();
     this.board = React.createRef();
+    this.you = React.createRef();
     this.blue = React.createRef();
     this.blueActive = React.createRef();
     this.green = React.createRef();
@@ -29,6 +30,10 @@ export default class Canvas extends React.Component {
     this.diceFour = React.createRef();
     this.diceFive = React.createRef();
     this.diceSix = React.createRef();
+    this.medals = React.createRef();
+
+    this.movesQueue = -1;
+    this.canvasStyle = {marginLeft: (window.innerWidth - window.innerHeight) / 2};
   }
 
   static contextType = GameContext;
@@ -38,20 +43,31 @@ export default class Canvas extends React.Component {
     canvasUtils.initCanvasObjects(this);
   }
 
+  // this method update queue for constructor
+  updateQueue = (i) => {
+    this.movesQueue = this.movesQueue + i;
+  }
+
+
+
   render() {
     return (
       <GameContext.Consumer>
         {(response) => {
-          canvasUtils.updateGame(response);
+          console.log(this.movesQueue);
+          setTimeout(canvasUtils.updateGame, this.movesQueue * 1000, response, this.updateQueue);
+          this.updateQueue(1);
           return (
             <div id="canvas-wrap">
             <canvas
+              style={this.canvasStyle}
               id="background-layer"
               ref={this.canvasBackgroundLayer}
               width={this.state.boardSize.height}
               height={this.state.boardSize.width}
             />
             <canvas
+              style={this.canvasStyle}
               id="game-layer"
               ref={this.canvasGameLayer}
               width={this.state.boardSize.height}
@@ -61,6 +77,12 @@ export default class Canvas extends React.Component {
               ref={this.board}
               src={require("../assets/board.svg")}
               alt="board"
+              className="hidden"
+            />
+            <img
+              ref={this.you}
+              src={require("../assets/text/you.svg")}
+              alt="you"
               className="hidden"
             />
             <div id="powns">
@@ -150,6 +172,14 @@ export default class Canvas extends React.Component {
                 alt="6"
                 className="hidden dice"
               />
+            </div>
+            <div>
+              <img
+                  ref={this.medals}
+                  src={require("../assets/medals.svg")}
+                  alt="first-place"
+                  className="hidden"
+                />
             </div>
           </div>
           )

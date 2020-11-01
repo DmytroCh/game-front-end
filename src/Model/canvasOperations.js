@@ -21,6 +21,16 @@ let boardSize = {
     height: 0
 }
 
+let youSize = {
+    width: 0,
+    height: 0
+}
+
+let medalSize = {
+    width: 0,
+    height: 0
+}
+
 export const setSizes = (board) => {
     pownSize = {
         width: board.width / 12,
@@ -32,11 +42,23 @@ export const setSizes = (board) => {
         height: board.height / 11
     }
 
+    youSize = {
+        width: 2 * board.width / 11,
+        height: board.height / 11
+    }
+
+    medalSize = {
+        width: board.width / 22,
+        height: board.height / 22
+    }
+
     boardSize = board;
 
     cellsMap.generateCellsMap(cellSize);
     cellsMap.generateHomeCellsMaps(cellSize);
     cellsMap.generateDicesMap(cellSize);
+    cellsMap.generateYouMap(cellSize);
+    cellsMap.generateMedalsMap(cellSize);
 }
 
 export const getPownSize = () => {
@@ -69,7 +91,7 @@ export const initCanvasObjects = (canvasCtx) => {
 }
 
 // This method runs everytime when context changed
-export const updateGame = (res) => {
+export const updateGame = (res, updateQueue) => {
     console.log("Response", res);
     if(res.data.hasOwnProperty("response")){
         serverResponse = res;
@@ -78,6 +100,9 @@ export const updateGame = (res) => {
         updateStartAreaPowns(res.data.response.powns);
         updateDice(res.data.response.dice, res.data.response.players);
         updatePowns(res.data.response.board, res.data.response.powns, res.data.response.players);
+        updateMedals(res.data.response.players);
+        drawYouText(res);
+        updateQueue(-1);
     }
 }
 
@@ -114,6 +139,40 @@ const updateStartAreaPowns = (powns) => {
     }));
 }
 
+// This method set medals for winners (only 1-3 places)
+const updateMedals = (players) => {
+    players.forEach((player => {
+        if(player.place !== 0){
+            const x = cellsMap.medalsMap[player.startPosition].x + medalSize.width / 2;
+            const y = cellsMap.medalsMap[player.startPosition].y + medalSize.height / 2;
+            const medalWidth = cellsMap.getMedals().width;
+            const medalHeight = cellsMap.getMedals().height;
+
+            switch(player.place){
+                case 1:
+                    const goldenStartX = cellsMap.getMedals().positions.golden.x;
+                    const goldenStartY = cellsMap.getMedals().positions.golden.y;
+                    canvasGameLayer.drawImage(canvasContext.medals.current,goldenStartX, goldenStartY, medalWidth,
+                        medalHeight, x, y, medalSize.width, medalSize.height);
+                    break;
+                case 2:
+                    const silverStartX = cellsMap.getMedals().positions.silver.x;
+                    const silverStartY = cellsMap.getMedals().positions.silver.y;
+                    canvasGameLayer.drawImage(canvasContext.medals.current,silverStartX, silverStartY, medalWidth,
+                        medalHeight, x, y, medalSize.width, medalSize.height);
+                    break;
+                case 3:
+                    const bronzeStartX = cellsMap.getMedals().positions.bronze.x;
+                    const bronzeStartY = cellsMap.getMedals().positions.bronze.y;
+                    canvasGameLayer.drawImage(canvasContext.medals.current,bronzeStartX, bronzeStartY, medalWidth,
+                        medalHeight, x, y, medalSize.width, medalSize.height);
+                    break;
+                default:
+            }
+        }
+    }));
+}
+
 // This method updates main lap
 const updatePowns = (lap, powns, players) => {
     for(let i = 0; i < lap.length; i++){
@@ -141,6 +200,15 @@ const drawStartAreaPown = (color, startAreaPosition) => {
     const x = cellsMap.cellsHomeMap[startAreaPosition].x;
     const y = cellsMap.cellsHomeMap[startAreaPosition].y;
     canvasGameLayer.drawImage(color, x, y, pownSize.width, pownSize.height);
+}
+
+const drawYouText = (res) => {
+    const playerId = res.socketId;
+    const playerPosition = res.data.response.players.find(player => playerId === player.id).startPosition;
+
+    const x = cellsMap.youMap[playerPosition].x;
+    const y = cellsMap.youMap[playerPosition].y;
+    canvasGameLayer.drawImage(canvasContext.you.current, x, y, youSize.width, youSize.height);
 }
 
 // This method responsible for proper color of pown
