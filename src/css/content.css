@@ -1,0 +1,13 @@
+body{
+    overflow: hidden;
+}
+#content{
+    width: 100vw;
+    height: 100vh;
+    background-color: bisque;
+    text-align: center;
+}
+
+.hidden{
+    visibility: hidden;
+}

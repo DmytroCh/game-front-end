@@ -1,0 +1,23 @@
+body {
+    margin: 0;
+}
+
+canvas{
+    position: absolute;
+}
+
+#background-layer{
+    z-index: 0;
+}
+
+#game-layer{
+    z-index: 1;
+}
+
+#canvas-wrap{
+    position: relative;
+}
+
+#pown{
+    opacity: 0;
+}
