@@ -1,21 +1,39 @@
-FROM node:13.12.0-alpine
+# => Build container
+FROM node:13.12.0-alpine as builder
 
 # Create app directory
-WORKDIR /usr/src/app
-
-# add `/app/node_modules/.bin` to $PATH
-ENV PATH /usr/src/app/node_modules/.bin:$PATH
+WORKDIR /app
 
 # install app dependencies
-COPY package.json ./
-COPY package-lock.json ./
+COPY package.json .
+COPY package-lock.json .
+COPY . .
 RUN npm install --silent
 RUN npm install react-scripts@3.4.1 -g --silent
 RUN npm run build
 
-# Bundle app source
-COPY . ./
+# => Run container
+FROM nginx:1.15.2-alpine
 
-EXPOSE 4000
+# Nginx config
+RUN rm -rf /etc/nginx/conf.d
+COPY conf /etc/nginx
 
-# CMD [ "npm", "start" ]
+# Static build
+COPY --from=builder /app/build /usr/share/nginx/html/
+
+EXPOSE 80
+
+# Copy .env file and shell script to container
+WORKDIR /usr/share/nginx/html
+COPY ./env.sh .
+COPY .env .
+
+# Add bash
+RUN apk add --no-cache bash
+
+# Make our shell script executable
+RUN chmod +x env.sh
+
+# Start Nginx server
+CMD ["/bin/bash", "-c", "/usr/share/nginx/html/env.sh && nginx -g \"daemon off;\""]

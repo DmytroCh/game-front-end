@@ -7,7 +7,7 @@ export const emitNewMove = (pownId) => {
 };
 
 export const initWebSocketEvents = (stateUpdate) => {
-    socket = openSocket('https://unlucky-wolverine-48.loca.lt/');
+    socket = openSocket(window._env_.API_URL);
 
     socket.on('new-player-joined', response => {
         stateUpdate({
