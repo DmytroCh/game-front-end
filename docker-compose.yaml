@@ -2,12 +2,12 @@ version: "3.2"
 services:
   multiplayer-api:
     build:
-      context: https://github.com/DmytroCh/game-back-end.git#feature/separate-container
+      context: https://github.com/DmytroCh/game-back-end.git#master
     ports:
       - "3001:3001"
   multiplayer-ui:
     build:
-      context: https://github.com/DmytroCh/game-front-end.git#feature/light-container-nginx
+      context: https://github.com/DmytroCh/game-front-end.git#master
     depends_on:
       - multiplayer-api
     ports:
