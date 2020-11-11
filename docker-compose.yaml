@@ -13,5 +13,5 @@ services:
     ports:
       - "3000:3000"
     environment:
-      - "API_URL=	http://vmi473672.contaboserver.net:3001"
+      - "API_URL=http://vmi473672.contaboserver.net:3001"
 
