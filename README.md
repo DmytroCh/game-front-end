@@ -12,7 +12,7 @@ The main goal of this project is to create Smart TV multiplayer game, that's why
 
 # Screenshots
 
-![enter image description here](https://github.com/DmytroCh/game-front-end/blob/feature/base-improve/screenshot_board.png)
+![enter image description here](https://github.com/DmytroCh/game-front-end/blob/master/screenshot_board.png)
 
   
 
