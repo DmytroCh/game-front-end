@@ -22,7 +22,7 @@ COPY conf /etc/nginx
 # Static build
 COPY --from=builder /app/build /usr/share/nginx/html/
 
-EXPOSE 80
+EXPOSE 3000
 
 # Copy .env file and shell script to container
 WORKDIR /usr/share/nginx/html

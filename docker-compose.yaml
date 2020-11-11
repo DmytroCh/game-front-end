@@ -1,0 +1,17 @@
+version: "3.2"
+services:
+  multiplayer-api:
+    build:
+      context: https://github.com/DmytroCh/game-back-end.git#feature/separate-container
+    ports:
+      - "3001:3001"
+  multiplayer-ui:
+    build:
+      context: https://github.com/DmytroCh/game-front-end.git#feature/light-container-nginx
+    depends_on:
+      - multiplayer-api
+    ports:
+      - "3000:3000"
+    environment:
+      - "API_URL=	http://vmi473672.contaboserver.net:3001"
+
