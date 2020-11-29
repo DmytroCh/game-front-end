@@ -71,8 +71,9 @@ export const initCanvasObjects = (canvasCtx) => {
     canvasGameLayer = canvasCtx.canvasGameLayer.current.getContext("2d");
 
     // Draw board
-    canvasCtx.board.current.onload = () => {
-        canvasBackgroundLayer.drawImage(canvasCtx.board.current, 0, 0);
+    const b = canvasCtx.board.current;
+    b.onload = () => {
+        canvasBackgroundLayer.drawImage(b, 0, 0);
       };
 
     canvasContext.canvasGameLayer.current.addEventListener('click', (event) => {

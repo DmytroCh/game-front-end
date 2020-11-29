@@ -2,14 +2,15 @@ import React from "react";
 import "../css/canvas.css";
 import GameContext from "../Contexts/GameContext";
 import * as canvasUtils from "../Model/canvasOperations";
+import * as win from "../Model/window";
 
 export default class Canvas extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
         boardSize: {
-            height: window.innerHeight,
-            width: window.innerHeight
+            height: win.getBoardSize(),
+            width: win.getBoardSize()
         }
     };
     this.canvasBackgroundLayer = React.createRef();
@@ -33,7 +34,7 @@ export default class Canvas extends React.Component {
     this.medals = React.createRef();
 
     this.movesQueue = -1;
-    this.canvasStyle = {marginLeft: (window.innerWidth - window.innerHeight) / 2};
+    this.canvasStyle = {marginLeft: win.getLeftMargin()};
   }
 
   static contextType = GameContext;
