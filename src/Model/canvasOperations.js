@@ -95,15 +95,17 @@ export const initCanvasObjects = (canvasCtx) => {
 export const updateGame = (res, updateQueue) => {
     console.log("Response", res);
     if(res.data.hasOwnProperty("response")){
-        serverResponse = res;
-        canvasGameLayer.clearRect(0, 0, boardSize.width, boardSize.height);
-        canvasGameLayer.beginPath();
-        updateStartAreaPowns(res.data.response.powns);
-        updateDice(res.data.response.dice, res.data.response.players);
-        updatePowns(res.data.response.board, res.data.response.powns, res.data.response.players);
-        updateMedals(res.data.response.players);
-        drawYouText(res);
-        updateQueue(-1);
+        if(res.data.response.hasOwnProperty("createdOn")){
+            serverResponse = res;
+            canvasGameLayer.clearRect(0, 0, boardSize.width, boardSize.height);
+            canvasGameLayer.beginPath();
+            updateStartAreaPowns(res.data.response.powns);
+            updateDice(res.data.response.dice, res.data.response.players);
+            updatePowns(res.data.response.board, res.data.response.powns, res.data.response.players);
+            updateMedals(res.data.response.players);
+            drawYouText(res);
+            updateQueue(-1);
+        }
     }
 }
 

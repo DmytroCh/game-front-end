@@ -8,7 +8,7 @@ export const emitNewMove = (pownId) => {
 
 export const initWebSocketEvents = (stateUpdate) => {
     const env = window._env_;
-    socket = openSocket(env ? env.API_URL : "http://localhost:4000");
+    socket = openSocket(env ? env.API_URL : "http://localhost:3001");
 
     socket.on('new-player-joined', response => {
         stateUpdate({
