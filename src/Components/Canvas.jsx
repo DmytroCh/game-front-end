@@ -34,7 +34,12 @@ export default class Canvas extends React.Component {
     this.medals = React.createRef();
 
     this.movesQueue = -1;
-    this.canvasStyle = {marginLeft: win.getLeftMargin()};
+    this.canvasStyle = {
+      marginLeft: win.getLeftMargin()
+    };
+    this.wrapStyle = {
+      paddingTop: win.getTopMargin()
+    }
   }
 
   static contextType = GameContext;
@@ -55,11 +60,10 @@ export default class Canvas extends React.Component {
     return (
       <GameContext.Consumer>
         {(response) => {
-          console.log(this.movesQueue);
           setTimeout(canvasUtils.updateGame, this.movesQueue * 1000, response, this.updateQueue);
           this.updateQueue(1);
           return (
-            <div id="canvas-wrap">
+            <div id="canvas-wrap" style={this.wrapStyle}>
             <canvas
               style={this.canvasStyle}
               id="background-layer"

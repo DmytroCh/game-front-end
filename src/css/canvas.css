@@ -1,10 +1,5 @@
-body {
-    margin: 0;
-}
-
 canvas{
     position: absolute;
-    top: 200px;
 }
 
 #background-layer{
