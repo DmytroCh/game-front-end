@@ -1,10 +1,13 @@
-body{
+html, body{
+    margin: 0;
     overflow: hidden;
+    min-height: 100%;
 }
+
 #content{
     width: 100vw;
     height: 100vh;
-    background-color: bisque;
+    background-color: #E8E8E8;
     text-align: center;
 }
 
